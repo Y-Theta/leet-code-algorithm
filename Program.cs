@@ -3,4 +3,9 @@ using System.Diagnostics;
 
 Console.WriteLine("Hello, World!");
 
-new leetcode.lcp14.Solution().IsMatch(6,16);
+// int len = 25;
+// for (int i = 1; i < len; i++)
+// {
+//     Debug.WriteLine($"{i} {len - 1} {new leetcode.lcp14.Solution().HCF(i, len - 1)}");
+// }
+Debug.WriteLine($"{new leetcode.lcp14.Solution().SplitArray(new int[] { 3, 23, 7, 17, 19, 67, 2, 3, 2 })}");
