@@ -8,4 +8,5 @@ Console.WriteLine("Hello, World!");
 // {
 //     Debug.WriteLine($"{i} {len - 1} {new leetcode.lcp14.Solution().HCF(i, len - 1)}");
 // }
+
 Debug.WriteLine($"{new leetcode.lcp14.Solution().SplitArray(new int[] { 3, 23, 7, 17, 19, 67, 2, 3, 2 })}");

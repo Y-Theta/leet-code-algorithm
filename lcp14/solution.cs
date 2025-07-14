@@ -31,7 +31,6 @@ namespace leetcode.lcp14
             return false;
         }
 
-        List<int>[] primes = Enumerable.Range(0, 1000001).Select(i => new List<int>()).ToArray();
         public bool IsPrime(int prime)
         {
             int start = (int)Math.Floor(Math.Sqrt(prime));
@@ -46,24 +45,37 @@ namespace leetcode.lcp14
             return true;
         }
 
-        public void FillPrimesList(List<int>[] list)
+        int[] primes = Enumerable.Repeat(1,1000001).ToArray();
+        public void FillPrimesList(int[] list)
         {
-            list[0] = list[1] = new List<int> { 1 };
+            list[0] = list[1] = 1;
             for (int i = 2; i < list.Length; i++)
             {
-                if (IsPrime(i))
+                for (int j = i; j < list.Length; j += i)
                 {
-                    for (int j = 1; i * j < list.Length; j++)
+                    if (list[j] > 1)
                     {
-                        list[i * j].Add(i);
+                        continue;
                     }
+                    list[j] = i;
                 }
             }
         }
 
-        public List<int> GetFactors(int num)
+        HashSet<int> items = new HashSet<int>(10);
+        public ISet<int> GetFactors(int num)
         {
-            return primes[num];
+            items.Clear();
+            var x = primes[num];
+            var temp = num;
+            while (x > 1)
+            {
+                items.Add(x);
+                x = temp / x;
+                temp = x;
+                x = primes[x];
+            }
+            return items;
         }
 
         // 定义函数 f(i) = Math.Min(f(i-1) + 1, ) 
@@ -71,6 +83,7 @@ namespace leetcode.lcp14
         public int SplitArray(int[] nums)
         {
             FillPrimesList(primes);
+            var set = GetFactors(45231);
             results = new int[nums.Length];
             results[0] = 1;
             for (int i = 1; i < nums.Length; i++)
